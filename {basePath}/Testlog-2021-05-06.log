@@ -1,0 +1,4 @@
+20:04:14.071 [main] INFO  tech.opdev.json.Operation - Key: responses
+20:04:14.073 [main] INFO  tech.opdev.json.StdPathItem - Key: get
+20:04:14.074 [main] INFO  tech.opdev.json.Operation - Key: responses
+20:04:14.075 [main] INFO  tech.opdev.json.App - paths: {/v2=StdPathItem(summary=null, description=null, operations={get=Operation(description=null, name=getVersionDetailsv2, summary=Show API version details, deprecated=false, externalDocs=null, responses=null, requestBody=null, tags=null, parameters=[], security=[], servers=[], callbacks={})}, servers=[], parameters=[]), /=StdPathItem(summary=null, description=null, operations={get=Operation(description=null, name=listVersionsv2, summary=List API versions, deprecated=false, externalDocs=null, responses=null, requestBody=null, tags=null, parameters=[], security=[], servers=[], callbacks={})}, servers=[], parameters=[])}
