@@ -9,11 +9,13 @@ import java.util.Map;
 import java.util.Optional;
 
 import jakarta.json.Json;
+import jakarta.json.JsonObject;
 import jakarta.json.JsonValue;
 import jakarta.json.stream.JsonLocation;
 import jakarta.json.stream.JsonParser;
 
 import lombok.extern.log4j.Log4j2;
+import tech.opdev.json.Document.DocumentBuilder;
 
 @Log4j2
 public class App {
@@ -23,31 +25,29 @@ public class App {
 
     public static void main(String[] args) {
         // System.out.println(new App().getGreeting());
-        try (InputStream in = App.class.getResourceAsStream("/api.json")) {
-            JsonParser parser = Json.createParser(in);
+        try (JsonParser parser = Json.createParser(App.class.getResourceAsStream("/api.json"))) {
             JsonLocation loc = parser.getLocation();
             log.info("Reading from line {}", loc.getLineNumber());
             parser.next();
-            Document document = new Document();
-            parser.getObjectStream().forEach(obj->{
-                String header = obj.getKey();
-                JsonValue val = obj.getValue();
+            JsonObject object = parser.getObject();
+            DocumentBuilder builder = Document.builder();
+            object.forEach((header,val)->{
                 log.info("Key: {}", header);
                 switch (header) {
                     case "openapi":
-                        log.info("version: {}", val);
-                        document.setVersion(val.toString());
+                        builder.version(val.toString());
                         break;
-                    case "info":
-                        Info info = new Info(val.asJsonObject());
-                        document.setInfo(info);
-                        log.info("info: {}", info);
+                    case "info":{
+                        builder.info(Info.from(val.asJsonObject()));
+                        break;
+                    }
+                    case "servers":
+                        val.asJsonArray().forEach(sVal->{
+                            builder.server(Server.from(sVal.asJsonObject()));
+                        });
                         break;
                     case "paths":
-                        Map<String, PathItem> paths = new HashMap<>();
-                        val.asJsonObject().entrySet().stream().forEach(p->paths.put(p.getKey(), PathItem.getFrom(p.getValue().asJsonObject())));
-                        document.setPaths(Optional.of(paths));;
-                        log.info("paths: {}", paths);
+                        val.asJsonObject().forEach((k,v)->builder.path(k, PathItem.getFrom(v.asJsonObject())));
                         break;
                     case "externalDocs":
                         break;
@@ -55,7 +55,8 @@ public class App {
                         break;
                 }
             });
-            log.info("Done!!! {}", document);
+            parser.close();
+            log.info("Done!!! {}", builder.build());
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -4,34 +4,36 @@ import java.util.Map;
 import java.util.Optional;
 
 import jakarta.json.JsonObject;
-import lombok.Data;
+import lombok.Builder;
 
-@Data
+@Builder
 public class Info {
-    public Info(JsonObject asJsonObject) {
-        title = asJsonObject.getString("title");
-        version = asJsonObject.getString("version");
+    public static Info from(JsonObject asJsonObject) {
+        InfoBuilder builder = Info.builder();
+        builder.title(asJsonObject.getString("title"));
+        builder.version(asJsonObject.getString("version"));
         asJsonObject.entrySet().stream().forEach(prop -> {
             switch (prop.getKey()) {
                 case "summary":
-                    summary = Optional.of(prop.getValue().asJsonObject().getString("summary"));
+                    builder.summary(Optional.of(prop.getValue().asJsonObject().getString("summary")));
                     break;
                 case "description":
-                    description = Optional.of(prop.getValue().asJsonObject().getString("description"));
+                    builder.description(Optional.of(prop.getValue().asJsonObject().getString("description")));
                     break;
                 case "termsOfService":
-                    termsOfService = Optional.of(prop.getValue().asJsonObject().getString("termsOfService"));
+                    builder.termsOfService(Optional.of(prop.getValue().asJsonObject().getString("termsOfService")));
                     break;
                 case "contact":
-                    contact = Optional.empty();
+                    builder.contact(Optional.empty());
                     break;
                 case "license":
-                    license = Optional.empty();
+                    builder.license(Optional.empty());
                     break;
                 default:
                     break;
             }
         });
+        return builder.build();
     }
 
     private String title;
