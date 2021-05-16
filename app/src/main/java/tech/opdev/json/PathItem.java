@@ -23,6 +23,6 @@ public interface PathItem {
     Object patch();
     Object trace();
 
-    List<Object> servers();
+    List<Server> servers();
     List<Object> parameters();
 }

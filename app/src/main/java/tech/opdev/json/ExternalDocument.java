@@ -1,22 +1,14 @@
 package tech.opdev.json;
 
-import java.util.Optional;
+import javax.annotation.Nullable;
 
-import jakarta.json.JsonObject;
-import lombok.Data;
 import lombok.NonNull;
+import lombok.Value;
 
-@Data
+@Value 
 public class ExternalDocument {
-    Optional<String> description;
+    @Nullable
+    String description;
     @NonNull
     String url;
-
-    public static ExternalDocument from(JsonObject asJsonObject) {
-        ExternalDocument doc = new ExternalDocument(asJsonObject.getString("url"));
-        if(asJsonObject.containsKey("description")) {
-            doc.setDescription(Optional.of(asJsonObject.getString("description")));
-        }
-        return doc;
-    }
 }

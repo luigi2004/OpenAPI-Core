@@ -16,7 +16,7 @@ public class StdPathItem implements PathItem{
     String summary;
     String description;
     Map<String, Object> operations;
-    List<Object> servers;
+    List<Server> servers;
     List<Object> parameters;
 
     StdPathItem(JsonObject asJsonObject) {
@@ -95,7 +95,7 @@ public class StdPathItem implements PathItem{
     }
 
     @Override
-    public List<Object> servers() {
+    public List<Server> servers() {
         return servers;
     }
 

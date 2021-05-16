@@ -67,7 +67,7 @@ public class RefPathItem implements PathItem, Reference{
     }
 
     @Override
-    public List<Object> servers() {
+    public List<Server> servers() {
         return resolved.servers();
     }
 

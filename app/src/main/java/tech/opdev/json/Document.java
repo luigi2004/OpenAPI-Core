@@ -1,15 +1,10 @@
 package tech.opdev.json;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import lombok.Builder;
-import lombok.Data;
-import lombok.NonNull;
 import lombok.Singular;
-import lombok.Value;
 
 @Builder
 public class Document {

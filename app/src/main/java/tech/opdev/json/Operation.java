@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
 
 import jakarta.json.JsonObject;
 import lombok.Data;
@@ -21,7 +20,7 @@ public class Operation {
     List<Object> parameters;
     List<Object> security;
     List<Object> servers;
-    Map<String, Object> responses;
+    Map<String, Response> responses;
     Map<String, Object> callbacks;
 
     public Operation(JsonObject asJsonObject) {
@@ -61,12 +60,11 @@ public class Operation {
                     });
                     break;
                 case "responses":
-                    
+                    i.getValue().asJsonObject().forEach((k,v)-> responses.put(k, Response.from(v.asJsonObject())));
                     break;
                 case "externalDocs":
                     JsonObject ed = i.getValue().asJsonObject();
-                    externalDocs = new ExternalDocument(ed.getString("url"));
-                    externalDocs.setDescription(Optional.ofNullable(ed.getString("description",null)));
+                    externalDocs = new ExternalDocument(ed.getString("url"), ed.getString("description", ""));
                     break;
                 default:
                     break;
