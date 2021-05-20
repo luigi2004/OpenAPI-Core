@@ -1,6 +1,5 @@
 package tech.opdev.json;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import lombok.Builder;
@@ -28,7 +27,7 @@ public class StdResponse implements Response{
 
     @Override
     public Map<String, Object> content() {
-        return content;
+        return contents;
     }
 
     @Override

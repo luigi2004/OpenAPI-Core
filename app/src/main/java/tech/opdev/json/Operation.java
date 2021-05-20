@@ -19,7 +19,7 @@ public class Operation {
     List<String> tags;
     List<Object> parameters;
     List<Object> security;
-    List<Object> servers;
+    List<Server> servers;
     Map<String, Response> responses;
     Map<String, Object> callbacks;
 
@@ -28,43 +28,42 @@ public class Operation {
         security = new ArrayList<>();
         servers = new ArrayList<>();
         parameters = new ArrayList<>();
-        asJsonObject.entrySet().stream().forEach(i -> {
-            switch (i.getKey()) {
+        asJsonObject.forEach((key, value) -> {
+            switch (key) {
                 case "summary":
-                    summary = asJsonObject.getString("summary");
+                    summary = value.asJsonObject().getString("summary");
                     break;
                 case "description":
-                    description = asJsonObject.getString("description");
+                    description = value.asJsonObject().getString("description");
                     break;
                 case "operationId":
-                    name = asJsonObject.getString("operationId");
+                    name = value.asJsonObject().getString("operationId");
                     break;
                 case "callbacks":
-                    i.getValue().asJsonObject().entrySet().stream().forEach(c -> {
+                    value.asJsonObject().entrySet().stream().forEach(c -> {
                         callbacks.put(c.getKey(), null);
                     });
                     break;
                 case "security":
-                    i.getValue().asJsonArray().forEach(s -> {
+                    value.asJsonArray().forEach(s -> {
                         security.add(null);
                     });
                     break;
                 case "servers":
-                    i.getValue().asJsonArray().forEach(s -> {
-                        servers.add(null);
+                    value.asJsonArray().forEach(s -> {
+                        servers.add(Server.from(s.asJsonObject()));
                     });
                     break;
                 case "parameters":
-                    i.getValue().asJsonArray().forEach(s -> {
+                    value.asJsonArray().forEach(s -> {
                         parameters.add(null);
                     });
                     break;
                 case "responses":
-                    i.getValue().asJsonObject().forEach((k,v)-> responses.put(k, Response.from(v.asJsonObject())));
+                    value.asJsonObject().forEach((k,v)-> responses.put(k, Response.from(v.asJsonObject())));
                     break;
                 case "externalDocs":
-                    JsonObject ed = i.getValue().asJsonObject();
-                    externalDocs = new ExternalDocument(ed.getString("url"), ed.getString("description", ""));
+                    externalDocs = new ExternalDocument(value.asJsonObject().getString("url"), value.asJsonObject().getString("description", ""));
                     break;
                 default:
                     break;

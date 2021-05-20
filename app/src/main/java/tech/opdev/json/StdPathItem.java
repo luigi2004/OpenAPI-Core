@@ -15,7 +15,7 @@ public class StdPathItem implements PathItem{
 
     String summary;
     String description;
-    Map<String, Object> operations;
+    Map<String, Operation> operations;
     List<Server> servers;
     List<Object> parameters;
 
@@ -32,9 +32,15 @@ public class StdPathItem implements PathItem{
                 case "description":
                     description = asJsonObject.getString(key);
                     break;
-                case "service":
+                case "servers":
+                    asJsonObject.getJsonArray("servers").forEach(server->{
+                        servers.add(Server.from(server.asJsonObject()));
+                    });
                     break;
                 case "parameters":
+                    asJsonObject.getJsonArray("parameters").forEach(server->{
+                        
+                    });
                     break;
                 default:
                 log.info("Key: {}", key);

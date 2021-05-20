@@ -44,6 +44,10 @@ public class App {
                         val.asJsonObject().forEach((k,v)->builder.path(k, PathItem.getFrom(v.asJsonObject())));
                         break;
                     case "externalDocs":
+                        builder.externalDocs(new ExternalDocument(
+                            val.asJsonObject().getString("description", null),
+                            val.asJsonObject().getString("url")
+                        ));
                         break;
                     default:
                         break;

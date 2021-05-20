@@ -10,13 +10,16 @@ import lombok.Value;
 
 @Value
 public class Server {
-    @NonNull
     String url;
     String description;
     Map<String, Variable> variables;
 
     public static Server from(JsonObject asJsonObject) {
-        return null;
+
+        return new Server(
+            asJsonObject.getString("url"), 
+            asJsonObject.getString("description", ""), 
+            "variables");
     }
 
     public static class Variable {
