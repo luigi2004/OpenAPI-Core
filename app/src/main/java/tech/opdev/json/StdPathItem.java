@@ -61,42 +61,42 @@ public class StdPathItem implements PathItem{
     }
 
     @Override
-    public Object get() {
+    public Operation get() {
         return operations.get("get");
     }
 
     @Override
-    public Object put() {
+    public Operation put() {
         return operations.get("put");
     }
 
     @Override
-    public Object post() {
+    public Operation post() {
         return operations.get("post");
     }
 
     @Override
-    public Object delete() {
+    public Operation delete() {
         return operations.get("delete");
     }
 
     @Override
-    public Object options() {
+    public Operation options() {
         return operations.get("options");
     }
 
     @Override
-    public Object head() {
+    public Operation head() {
         return operations.get("head");
     }
 
     @Override
-    public Object patch() {
+    public Operation patch() {
         return operations.get("patch");
     }
 
     @Override
-    public Object trace() {
+    public Operation trace() {
         return operations.get("trace");
     }
 

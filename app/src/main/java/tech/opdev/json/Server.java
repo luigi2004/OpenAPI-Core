@@ -3,9 +3,10 @@ package tech.opdev.json;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import jakarta.json.JsonObject;
-import lombok.NonNull;
+import jakarta.json.JsonValue;
 import lombok.Value;
 
 @Value
@@ -15,28 +16,25 @@ public class Server {
     Map<String, Variable> variables;
 
     public static Server from(JsonObject asJsonObject) {
-
+        JsonObject vJsonObject = asJsonObject.getJsonObject("variables");
         return new Server(
             asJsonObject.getString("url"), 
             asJsonObject.getString("description", ""), 
-            "variables");
+            vJsonObject.asJsonObject().entrySet().stream().map(v -> new Object(){
+                public Variable var = new Variable(
+                v.getValue().asJsonObject().getString("description", ""), 
+                v.getValue().asJsonObject().getString("default"), 
+                v.getValue().asJsonObject().getJsonArray("enums").stream().map(JsonValue::toString).collect(Collectors.toList()));
+                public String k = v.getKey();
+            }
+            ).collect(Collectors.toMap(variable->variable.k, variable -> variable.var))
+        );
     }
 
-    public static class Variable {
-        List<String> enums;
-        final long defaultIndex;
-        Variable(String sub) {
-            enums = new ArrayList<>();
-            enums.add(sub);
-            defaultIndex = 0;
-        }
-
-        Variable(String defaultSub, String... otherSubs) {
-            this(defaultSub);
-            for(String sub : otherSubs) {
-                enums.add(sub);
-            }
-        }
-        
+    @Value
+    static class Variable {
+        String description;
+        String defaultValue;
+        List<String> enums;        
     }
 }

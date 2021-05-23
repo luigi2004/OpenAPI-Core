@@ -27,42 +27,42 @@ public class RefPathItem implements PathItem, Reference{
     }
 
     @Override
-    public Object get() {
+    public Operation get() {
         return resolved.get();
     }
 
     @Override
-    public Object put() {
+    public Operation put() {
         return resolved.put();
     }
 
     @Override
-    public Object post() {
+    public Operation post() {
         return resolved.post();
     }
 
     @Override
-    public Object delete() {
+    public Operation delete() {
         return resolved.delete();
     }
 
     @Override
-    public Object options() {
+    public Operation options() {
         return resolved.options();
     }
 
     @Override
-    public Object head() {
+    public Operation head() {
         return resolved.head();
     }
 
     @Override
-    public Object patch() {
+    public Operation patch() {
         return resolved.patch();
     }
 
     @Override
-    public Object trace() {
+    public Operation trace() {
         return resolved.trace();
     }
 

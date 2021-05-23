@@ -14,14 +14,14 @@ public interface PathItem {
     
     String summary();
     String description();
-    Object get();
-    Object put();
-    Object post();
-    Object delete();
-    Object options();
-    Object head();
-    Object patch();
-    Object trace();
+    Operation get();
+    Operation put();
+    Operation post();
+    Operation delete();
+    Operation options();
+    Operation head();
+    Operation patch();
+    Operation trace();
 
     List<Server> servers();
     List<Object> parameters();

@@ -21,7 +21,7 @@ public class Operation {
     List<Object> security;
     List<Server> servers;
     Map<String, Response> responses;
-    Map<String, Object> callbacks;
+    Map<String, PathItem> callbacks;
 
     public Operation(JsonObject asJsonObject) {
         callbacks = new HashMap<>();
