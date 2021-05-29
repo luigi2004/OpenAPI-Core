@@ -1,5 +1,7 @@
 package tech.opdev.json;
 
+import java.util.Arrays;
+
 import jakarta.json.JsonObject;
 import lombok.Builder;
 
@@ -9,7 +11,8 @@ public class Info {
         InfoBuilder builder = Info.builder();
         builder.title(asJsonObject.getString("title"));
         builder.version(asJsonObject.getString("version"));
-        asJsonObject.entrySet().stream().forEach(prop -> {
+        
+        asJsonObject.entrySet().stream().filter(i-> !Arrays.asList("title", "version").contains(i.getKey())).forEach(prop -> {
             JsonObject iJsonObject = prop.getValue().asJsonObject();
             switch (prop.getKey()) {
                 case "summary":

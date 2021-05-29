@@ -1,3 +1,2 @@
-19:57:35.832 [main] INFO  tech.opdev.json.App - Reading from line 1
-19:57:35.853 [main] INFO  tech.opdev.json.App - Key: openapi
-19:57:35.853 [main] INFO  tech.opdev.json.App - Key: info
+13:49:55.181 [main] INFO  tech.opdev.json.App - Key: paths
+13:49:55.235 [main] INFO  tech.opdev.json.StdPathItem - Key: get

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>json-test</name>
+	<name>OPENAPI-CORE</name>
 	<comment>Project json-test created by Buildship.</comment>
 	<projects>
 	</projects>
@@ -16,7 +16,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1620045357592</id>
+			<id>0</id>
 			<name></name>
 			<type>30</type>
 			<matcher>

@@ -1,0 +1,8 @@
+13:47:00.473 [main] INFO  tech.opdev.json.App - Key: openapi
+13:47:00.496 [main] INFO  tech.opdev.json.App - Key: info
+13:47:15.402 [main] INFO  tech.opdev.json.App - Reading from line 1
+13:47:15.425 [main] INFO  tech.opdev.json.App - Key: openapi
+13:47:15.426 [main] INFO  tech.opdev.json.App - Key: info
+13:49:55.123 [main] INFO  tech.opdev.json.App - Reading from line 1
+13:49:55.168 [main] INFO  tech.opdev.json.App - Key: openapi
+13:49:55.169 [main] INFO  tech.opdev.json.App - Key: info
