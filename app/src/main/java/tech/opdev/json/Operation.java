@@ -23,7 +23,7 @@ public class Operation {
     List<Object> security;
     List<Server> servers;
     Map<String, Response> responses;
-    Map<String, PathItem> callbacks;
+    Map<String, Callback> callbacks;
 
     public Operation(JsonObject asJsonObject) {
         callbacks = new HashMap<>();
@@ -44,7 +44,9 @@ public class Operation {
                     break;
                 case "callbacks":
                     value.asJsonObject().entrySet().stream().forEach(c -> {
-                        callbacks.put(c.getKey(), null);
+                        PathItem pathItem = PathItem.getFrom(c.getValue().asJsonObject().getJsonObject("name"));
+                        String expression = c.getValue().asJsonObject().getString("name");
+                        callbacks.put(c.getKey(), new Callback(expression, pathItem));
                     });
                     break;
                 case "security":
