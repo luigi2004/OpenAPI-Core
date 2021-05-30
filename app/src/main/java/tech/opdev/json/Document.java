@@ -5,8 +5,10 @@ import java.util.Map;
 
 import lombok.Builder;
 import lombok.Singular;
+import lombok.Value;
 
 @Builder
+@Value
 public class Document {
     String version;
     Info info;

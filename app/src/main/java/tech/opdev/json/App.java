@@ -54,7 +54,8 @@ public class App {
                 }
             });
             parser.close();
-            log.info("Done!!! {}", builder.build());
+            Document document = builder.build();
+            log.info("Done!!! {}", document);
         } catch (Exception e) {
             e.printStackTrace();
         }

@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import jakarta.json.JsonObject;
+import jakarta.json.JsonString;
+
 import lombok.Data;
 
 @Data
@@ -25,19 +27,20 @@ public class Operation {
 
     public Operation(JsonObject asJsonObject) {
         callbacks = new HashMap<>();
+        responses = new HashMap<>();
         security = new ArrayList<>();
         servers = new ArrayList<>();
         parameters = new ArrayList<>();
         asJsonObject.forEach((key, value) -> {
             switch (key) {
                 case "summary":
-                    summary = value.asJsonObject().getString("summary");
+                    summary = ((JsonString)value).getString();
                     break;
                 case "description":
-                    description = value.asJsonObject().getString("description");
+                    description = ((JsonString)value).getString();
                     break;
                 case "operationId":
-                    name = value.asJsonObject().getString("operationId");
+                    name = ((JsonString)value).getString();
                     break;
                 case "callbacks":
                     value.asJsonObject().entrySet().stream().forEach(c -> {
