@@ -5,7 +5,7 @@ import java.util.List;
 import jakarta.json.JsonObject;
 
 public interface PathItem {
-    static PathItem getFrom(JsonObject asJsonObject) {
+    static PathItem from(JsonObject asJsonObject) {
         if(asJsonObject.containsKey("$ref")) {
             return new RefPathItem(asJsonObject.getString("$ref"));
         }

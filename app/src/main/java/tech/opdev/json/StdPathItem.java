@@ -17,7 +17,7 @@ public class StdPathItem implements PathItem{
     String description;
     Map<String, Operation> operations;
     List<Server> servers;
-    List<Object> parameters;
+    List<Parameter> parameters;
 
     StdPathItem(JsonObject asJsonObject) {
         operations = new HashMap<>();
@@ -38,8 +38,8 @@ public class StdPathItem implements PathItem{
                     });
                     break;
                 case "parameters":
-                    asJsonObject.getJsonArray("parameters").forEach(server->{
-                        
+                    asJsonObject.getJsonArray("parameters").forEach(parameter->{
+                        parameters.add(Parameter.from(parameter.asJsonObject()));
                     });
                     break;
                 default:

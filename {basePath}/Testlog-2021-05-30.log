@@ -1,0 +1,8 @@
+01:05:27.375 [main] INFO  tech.opdev.json.App - Key: paths
+01:05:27.430 [main] INFO  tech.opdev.json.StdPathItem - Key: get
+01:07:04.359 [main] INFO  tech.opdev.json.App - Reading from line 1
+01:07:04.369 [main] INFO  tech.opdev.json.App - Key: openapi
+01:07:04.369 [main] INFO  tech.opdev.json.App - Key: info
+01:07:04.371 [main] INFO  tech.opdev.json.App - Key: paths
+01:07:04.374 [main] INFO  tech.opdev.json.StdPathItem - Key: get
+01:07:24.570 [main] INFO  tech.opdev.json.StdPathItem - Key: get

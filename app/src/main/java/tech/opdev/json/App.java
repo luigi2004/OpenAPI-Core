@@ -3,13 +3,14 @@
  */
 package tech.opdev.json;
 
-import jakarta.json.Json;
-import jakarta.json.JsonObject;
-import jakarta.json.stream.JsonLocation;
-import jakarta.json.stream.JsonParser;
+import java.io.InputStream;
+
+import jakarta.json.bind.Jsonb;
+import jakarta.json.bind.JsonbBuilder;
+import jakarta.json.bind.JsonbConfig;
 
 import lombok.extern.log4j.Log4j2;
-import tech.opdev.json.Document.DocumentBuilder;
+import tech.opdev.json.deserialization.DocumentAdapter;
 
 @Log4j2
 public class App {
@@ -19,42 +20,12 @@ public class App {
 
     public static void main(String[] args) {
         // System.out.println(new App().getGreeting());
-        try (JsonParser parser = Json.createParser(App.class.getResourceAsStream("/api.json"))) {
-            JsonLocation loc = parser.getLocation();
-            log.info("Reading from line {}", loc.getLineNumber());
-            parser.next();
-            JsonObject object = parser.getObject();
-            DocumentBuilder builder = Document.builder();
-            object.forEach((header,val)->{
-                log.info("Key: {}", header);
-                switch (header) {
-                    case "openapi":
-                        builder.version(val.toString());
-                        break;
-                    case "info":{
-                        builder.info(Info.from(val.asJsonObject()));
-                        break;
-                    }
-                    case "servers":
-                        val.asJsonArray().forEach(sVal->{
-                            builder.server(Server.from(sVal.asJsonObject()));
-                        });
-                        break;
-                    case "paths":
-                        val.asJsonObject().forEach((k,v)->builder.path(k, PathItem.getFrom(v.asJsonObject())));
-                        break;
-                    case "externalDocs":
-                        builder.externalDocs(new ExternalDocument(
-                            val.asJsonObject().getString("description", null),
-                            val.asJsonObject().getString("url")
-                        ));
-                        break;
-                    default:
-                        break;
-                }
-            });
-            parser.close();
-            Document document = builder.build();
+        JsonbConfig config = new JsonbConfig().withAdapters(
+            new DocumentAdapter()
+        );
+        Jsonb jsonb = JsonbBuilder.create(config);
+        try (InputStream is = App.class.getResourceAsStream("/api.json")) {
+            Document document = jsonb.fromJson(is, Document.class);
             log.info("Done!!! {}", document);
         } catch (Exception e) {
             e.printStackTrace();

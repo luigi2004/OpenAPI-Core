@@ -1,0 +1,8 @@
+01:07:24.571 [main] INFO  tech.opdev.json.App - Done!!! tech.opdev.json.Document@52719fb6
+01:09:10.431 [main] INFO  tech.opdev.json.App - Reading from line 1
+01:09:10.442 [main] INFO  tech.opdev.json.App - Key: openapi
+01:09:10.443 [main] INFO  tech.opdev.json.App - Key: info
+01:09:10.446 [main] INFO  tech.opdev.json.App - Key: paths
+01:09:10.450 [main] INFO  tech.opdev.json.StdPathItem - Key: get
+01:09:10.453 [main] INFO  tech.opdev.json.StdPathItem - Key: get
+01:18:10.019 [main] INFO  tech.opdev.json.App - Done!!! Document(version="3.0.0", info=tech.opdev.json.Info@52719fb6, paths={/=StdPathItem(summary=null, description=null, operations={get=Operation(description=null, name=listVersionsv2, summary=List API versions, deprecated=false, externalDocs=null, requestBody=null, tags=null, parameters=[], security=[], servers=[], responses={200=null, 300=null}, callbacks={})}, servers=[], parameters=[]), /v2=StdPathItem(summary=null, description=null, operations={get=Operation(description=null, name=getVersionDetailsv2, summary=Show API version details, deprecated=false, externalDocs=null, requestBody=null, tags=null, parameters=[], security=[], servers=[], responses={200=null, 203=null}, callbacks={})}, servers=[], parameters=[])}, jsonSchemaDialect=null, servers=[], webhooks={}, components={}, secruities=[], tags=[], externalDocs=null)

@@ -1,8 +1,8 @@
 package tech.opdev.json;
 
-import lombok.Value;
+import lombok.RequiredArgsConstructor;
 
-@Value
+@RequiredArgsConstructor
 public class StdCallback implements Callback{
     private final String expression;
     private final PathItem pathItem;

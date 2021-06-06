@@ -19,8 +19,8 @@ public class Operation {
     ExternalDocument externalDocs;
     Object requestBody;
     List<String> tags;
-    List<Object> parameters;
-    List<Object> security;
+    List<Parameter> parameters;
+    List<Security> security;
     List<Server> servers;
     Map<String, Response> responses;
     Map<String, Callback> callbacks;
@@ -44,14 +44,12 @@ public class Operation {
                     break;
                 case "callbacks":
                     value.asJsonObject().entrySet().stream().forEach(c -> {
-                        PathItem pathItem = PathItem.getFrom(c.getValue().asJsonObject().getJsonObject("name"));
-                        String expression = c.getValue().asJsonObject().getString("name");
-                        callbacks.put(c.getKey(), new Callback(expression, pathItem));
+                        callbacks.put(c.getKey(), Callback.from(c.getValue().asJsonObject()) );
                     });
                     break;
                 case "security":
                     value.asJsonArray().forEach(s -> {
-                        security.add(null);
+                        security.add(Security.from(s.asJsonObject()));
                     });
                     break;
                 case "servers":
@@ -61,7 +59,7 @@ public class Operation {
                     break;
                 case "parameters":
                     value.asJsonArray().forEach(s -> {
-                        parameters.add(null);
+                        parameters.add(Parameter.from(s.asJsonObject()));
                     });
                     break;
                 case "responses":
